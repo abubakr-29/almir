@@ -1,6 +1,7 @@
 import FeaturedCollection from "@/components/featuredCollection/FeaturedCollection";
 import Hero from "@/components/heroSection/Hero";
 import PromoBanner from "@/components/promoBanner/PromoBanner";
+import WhyChooseUs from "@/components/whyChooseUsSection/WhyChooseUs";
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
         <Hero />
         <FeaturedCollection />
         <PromoBanner />
-        {/* <div className="h-screen"/> */}
+        <WhyChooseUs />
       </main>
     </>
   );

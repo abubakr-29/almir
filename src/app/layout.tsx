@@ -3,6 +3,7 @@ import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
 import ReactLenis from "lenis/react";
 import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
         <ReactLenis root>
           <Navbar />
           {children}
+          <Footer />
         </ReactLenis>
       </body>
     </html>
