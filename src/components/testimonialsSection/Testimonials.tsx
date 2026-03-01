@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, createRef } from "react";
+import { useState, useCallback, useRef, createRef, useMemo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Icon } from "@iconify/react";
@@ -9,9 +9,6 @@ import { TestimonialCard } from "./TestimonialCard";
 import { useDragSwipe } from "./useDragSwipe";
 import { getSlot, getSlotProps } from "./carousel.utils";
 
-// ─── Placeholder data ─────────────────────────────────────────────────────────
-// TODO: remove once wired to CMS — pass real data via the `testimonials` prop.
-
 interface Testimonial {
   id: number;
   quote: string;
@@ -19,6 +16,8 @@ interface Testimonial {
   name: string;
   title: string;
 }
+// ─── Placeholder data ─────────────────────────────────────────────────────────
+// TODO: remove once wired to CMS — pass real data via the `testimonials` prop.
 
 const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
   {
@@ -65,21 +64,23 @@ const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
-interface TestimonialsProps {
+interface TestimonialsSectionProps {
   /** Pass CMS-fetched testimonials here. Falls back to placeholder data during development. */
   testimonials?: Testimonial[];
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function Testimonials({
+export default function TestimonialsSection({
   testimonials = PLACEHOLDER_TESTIMONIALS,
-}: TestimonialsProps) {
+}: TestimonialsSectionProps) {
   const [activeIndex, setActiveIndex] = useState(1);
   const total = testimonials.length;
 
-  const cardRefs = useRef<React.RefObject<HTMLDivElement | null>[]>(
-    testimonials.map(() => createRef<HTMLDivElement | null>()),
+  const cardRefs = useMemo(
+    () => testimonials.map(() => createRef<HTMLDivElement | null>()),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [total],
   );
 
   const next = useCallback(
@@ -92,10 +93,13 @@ export default function Testimonials({
   );
   const swipe = useDragSwipe(next, prev);
 
+  // containerRef lets useGSAP scope its context to the carousel
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   useGSAP(
     () => {
       testimonials.forEach((_, index) => {
-        const el = cardRefs.current[index]?.current;
+        const el = cardRefs[index]?.current;
         if (!el) return;
 
         const slot = getSlot(index, activeIndex, total);
@@ -111,7 +115,7 @@ export default function Testimonials({
         el.setAttribute("aria-hidden", slot !== 0 ? "true" : "false");
       });
     },
-    { dependencies: [activeIndex] },
+    { scope: containerRef, dependencies: [activeIndex] },
   );
 
   return (
@@ -130,6 +134,7 @@ export default function Testimonials({
 
         {/* Carousel */}
         <div
+          ref={containerRef}
           className="relative w-full max-w-125 h-87.5 sm:h-70 mb-8 flex justify-center mt-6 z-10 cursor-grab active:cursor-grabbing select-none"
           role="region"
           aria-label="Testimonials carousel"
@@ -139,7 +144,7 @@ export default function Testimonials({
             <TestimonialCard
               key={testimonial.id}
               testimonial={testimonial}
-              cardRef={cardRefs.current[index]}
+              cardRef={cardRefs[index]}
             />
           ))}
         </div>
@@ -149,14 +154,14 @@ export default function Testimonials({
           <button
             onClick={prev}
             aria-label="Previous testimonial"
-            className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-200 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
+            className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-200 transition-all duration-300 bg-white shadow-sm hover:shadow-md cursor-pointer"
           >
             <Icon icon="lucide:chevron-left" className="w-5 h-5" />
           </button>
           <button
             onClick={next}
             aria-label="Next testimonial"
-            className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-[#F97316] hover:border-orange-200 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
+            className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-[#F97316] hover:border-orange-200 transition-all duration-300 bg-white shadow-sm hover:shadow-md cursor-pointer"
           >
             <Icon icon="lucide:chevron-right" className="w-5 h-5" />
           </button>
