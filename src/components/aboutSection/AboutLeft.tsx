@@ -22,7 +22,7 @@ export default function AboutLeft() {
         <span className="w-12 h-px bg-[#EA4036]" />
       </div>
       <h2 className="font-playfair-display text-4xl md:text-5xl lg:text-6xl text-slate-900 tracking-tighter leading-[1.1] mb-6">
-        Where Tradition Meets Modern Luxury
+        Where Tradition Meets Modern Luxury.
       </h2>
       <div className="text-slate-700 space-y-4 text-base lg:text-lg leading-relaxed">
         <p>

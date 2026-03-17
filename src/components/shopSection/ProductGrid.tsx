@@ -1,15 +1,13 @@
 import { ProductCard } from "./ProductCard";
 import type { Product } from "./types";
 
-interface ProductGridProps {
-  products: Product[];
-}
-
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products }: { products: Product[] }) {
   if (products.length === 0) {
     return (
-      <div className="py-24 text-center text-slate-400 text-sm">
-        No products found in this category.
+      <div className="py-24 text-center">
+        <p className="text-slate-400 text-xs tracking-widest uppercase">
+          No scents found
+        </p>
       </div>
     );
   }

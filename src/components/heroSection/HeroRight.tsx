@@ -4,13 +4,13 @@ export default function HeroRight() {
   return (
     <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center pl-0 md:pl-8 order-1 md:order-2 mt-10 md:mt-0 text-center md:text-left">
       <span className="text-slate-500 font-medium text-base lg:text-lg mb-4 tracking-wide">
-        Luxury Fragrance Store
+        Wear Your Presence.
       </span>
 
       <h1 className="text-5xl lg:text-7xl text-slate-900 leading-[1.1] mb-8 tracking-tight font-playfair-display">
         Smell is a word <br className="hidden md:block" />
         Perfume is <br className="hidden md:block" />
-        Literature
+        Literature.
       </h1>
 
       <p className="text-base lg:text-lg text-slate-500 max-w-md mb-10 leading-relaxed">

@@ -2,11 +2,10 @@ import { Icon } from "@iconify/react";
 import { capitalizeName, getInitials } from "./carousel.utils";
 
 interface Testimonial {
-  id: number;
+  id: string;
   quote: string;
   rating: number;
   name: string;
-  title: string;
 }
 
 interface TestimonialCardProps {
@@ -43,7 +42,7 @@ export function TestimonialCard({
       </div>
 
       {/* Quote */}
-      <p className="text-slate-700 text-lg leading-relaxed mb-8 flex-1">
+      <p className="text-slate-700 text-lg leading-relaxed mb-8 flex-1 line-clamp-4">
         &ldquo;{testimonial.quote}&rdquo;
       </p>
 
@@ -57,15 +56,15 @@ export function TestimonialCard({
             <span className="text-sm font-semibold text-slate-900">
               {capitalizeName(testimonial.name)}
             </span>
-            <span className="text-xs font-medium text-slate-500">
+            {/* <span className="text-xs font-medium text-slate-500">
               {testimonial.title}
-            </span>
+            </span> */}
           </div>
         </div>
-        <Icon
+        {/* <Icon
           icon="lucide:link"
           className="w-5 h-5 text-slate-300 -rotate-45"
-        />
+        /> */}
       </div>
     </div>
   );

@@ -1,24 +1,26 @@
 "use client";
 
-import { PRODUCT_CATEGORIES, type ProductCategory } from "./types";
-
-export const ALL_TAB = "All" as const;
-export type FilterTab = typeof ALL_TAB | ProductCategory;
-
-export const TABS: FilterTab[] = [ALL_TAB, ...PRODUCT_CATEGORIES];
+import { ALL_TAB, type FilterTab } from "./types";
 
 interface CategoryTabsProps {
+  categories: string[];
   active: FilterTab;
   onChange: (tab: FilterTab) => void;
 }
 
-export function CategoryTabs({ active, onChange }: CategoryTabsProps) {
+export function CategoryTabs({
+  categories,
+  active,
+  onChange,
+}: CategoryTabsProps) {
+  const tabs: FilterTab[] = [ALL_TAB, ...categories];
+
   return (
     <nav
       aria-label="Filter products by category"
       className="flex flex-wrap justify-center gap-6 md:gap-8 mt-10"
     >
-      {TABS.map((tab) => (
+      {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => onChange(tab)}

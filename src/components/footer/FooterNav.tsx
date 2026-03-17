@@ -1,22 +1,9 @@
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 interface NavLink {
   label: string;
   href: string;
-}
-
-interface FooterColumn {
-  heading?: string;
-  links: NavLink[];
-}
-
-interface SocialLink {
-  label: string;
-  href: string;
-  icon: string;
 }
 
 interface ContactItem {
@@ -25,104 +12,104 @@ interface ContactItem {
   href: string;
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+const EXPLORE_COLUMN: NavLink[] = [
+  { label: "Shop", href: "/shop" },
+  { label: "About", href: "/#about" },
+];
 
-const FOOTER_COLUMNS: FooterColumn[] = [
-  {
-    heading: "Explore",
-    links: [
-      { label: "Shop", href: "/shop" },
-      { label: "About", href: "/about" },
-      { label: "FAQ", href: "/faq" },
-      { label: "Shipping & Returns", href: "/shipping" },
-      { label: "Download App", href: "/app" },
-    ],
-  },
-  {
-    heading: "Legal",
-    links: [
-      { label: "Terms and Conditions", href: "/terms" },
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Cookies Policy", href: "/cookies" },
-      { label: "Contact Us", href: "/contact" },
-    ],
-  },
+const LEGAL_COLUMN: NavLink[] = [
+  { label: "Terms and Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 const CONTACT_ITEMS: ContactItem[] = [
   {
     icon: "lucide:phone",
-    label: "+971 50 123 4567",
-    href: "tel:+971501234567",
+    label: "+91 90518 79009",
+    href: "tel:+919051879009",
   },
   {
     icon: "lucide:mail",
     label: "hello@almir.com",
     href: "mailto:hello@almir.com",
   },
-  {
-    icon: "lucide:map-pin",
-    label: "Kolkata, India",
-    href: "https://maps.google.com",
-  },
 ];
 
-const SOCIAL_LINKS: SocialLink[] = [
-  {
-    label: "Instagram",
-    href: "https://instagram.com",
-    icon: "mdi:instagram",
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com",
-    icon: "mdi:facebook",
-  },
-  {
-    label: "X / Twitter",
-    href: "https://x.com",
-    icon: "ri:twitter-x-fill",
-  },
+const SOCIAL_LINKS: ContactItem[] = [
+  { label: "Instagram", href: "https://instagram.com", icon: "mdi:instagram" },
+  { label: "Facebook", href: "https://facebook.com", icon: "mdi:facebook" },
+  { label: "X / Twitter", href: "https://x.com", icon: "ri:twitter-x-fill" },
   {
     label: "WhatsApp",
-    href: "https://wa.me/971501234567",
+    href: "https://wa.me/919051879009?text=Hi%20AL-MIR%2C%20I%27d%20love%20to%20know%20more%20about%20your%20fragrances%20and%20get%20recommendations%20for%20my%20style.",
     icon: "ic:baseline-whatsapp",
   },
 ];
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
 export default function FooterNav() {
   return (
     <div className="w-full md:w-8/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:pl-20 pt-2 md:pt-0">
-      {/* Nav columns */}
-      {FOOTER_COLUMNS.map((col, colIndex) => (
-        <div key={colIndex} className="flex flex-col gap-1">
-          {col.heading && (
-            <p className="text-xs tracking-[0.15em] uppercase text-slate-400 mb-3 font-medium">
-              {col.heading}
-            </p>
-          )}
-          <div className="flex flex-col gap-3.5">
-            {col.links.map((link) => (
+      {/* Explore + Legal */}
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-1">
+          <p className="text-xs tracking-[0.15em] uppercase text-slate-400 mb-3 font-medium">
+            Explore
+          </p>
+          <div className="flex flex-col gap-3">
+            {EXPLORE_COLUMN.map((item) => (
               <Link
-                key={link.label}
-                href={link.href}
+                key={item.label}
+                href={item.href}
                 className="text-base text-slate-800 hover:text-[#FF3B30] transition-colors duration-200"
               >
-                {link.label}
+                {item.label}
               </Link>
             ))}
           </div>
         </div>
-      ))}
 
-      {/* Contact column */}
-      <div className="flex flex-col gap-1 col-span-2 lg:col-span-1">
+        <div className="flex flex-col gap-1">
+          <p className="text-xs tracking-[0.15em] uppercase text-slate-400 mb-3 font-medium">
+            Legal
+          </p>
+          <div className="flex flex-col gap-2.5">
+            {LEGAL_COLUMN.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-base text-slate-800 hover:text-[#FF3B30] transition-colors duration-200"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Map */}
+      <div className="flex flex-col gap-1">
+        <p className="text-xs tracking-[0.15em] uppercase text-slate-400 mb-3 font-medium">
+          Find Us
+        </p>
+        <div className="w-full h-40 overflow-hidden rounded-sm opacity-80 hover:opacity-100 transition-opacity duration-300">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230.32857896841747!2d88.32435340039879!3d22.53203370510108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02779358174ab5%3A0xa516acf13936b8bd!2sAL-MIR%20fragrances!5e0!3m2!1sen!2sin!4v1773759819762!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style={{ border: 0, filter: "grayscale(100%) contrast(0.9)" }}
+            allowFullScreen={false}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Al Mir location"
+          />
+        </div>
+      </div>
+
+      {/* Contact */}
+      <div className="flex flex-col gap-1">
         <p className="text-xs tracking-[0.15em] uppercase text-slate-400 mb-3 font-medium">
           Contact
         </p>
-
         <div className="flex flex-col gap-3.5">
           {CONTACT_ITEMS.map((item) => (
             <Link
@@ -143,7 +130,6 @@ export default function FooterNav() {
           ))}
         </div>
 
-        {/* Social icons */}
         <div className="flex items-center gap-3 mt-6">
           {SOCIAL_LINKS.map((social) => (
             <Link

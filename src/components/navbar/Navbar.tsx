@@ -169,28 +169,26 @@ export default function Navbar() {
 
     // Handle section links
     if (href.startsWith("#")) {
-      if (pathname === "/") {
-        // Same page - smooth scroll with delay for mobile menu close
+      const targetId = href.replace("#", "");
+      const element = document.getElementById(targetId);
+
+      if (element && lenis) {
+        // Same page target exists - smooth scroll with delay for mobile menu close
         setTimeout(() => {
-          const targetId = href.replace("#", "");
-          const element = document.getElementById(targetId);
+          const navbar = document.querySelector("header");
+          const offset = navbar?.offsetHeight ?? 80;
 
-          if (element && lenis) {
-            const navbar = document.querySelector("header");
-            const offset = navbar?.offsetHeight ?? 80;
+          lenis.scrollTo(element, {
+            offset: -offset - 20,
+            duration: 1.8,
+            easing: (t: number) =>
+              t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+          });
 
-            lenis.scrollTo(element, {
-              offset: -offset - 20,
-              duration: 1.8,
-              easing: (t: number) =>
-                t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
-            });
-
-            window.history.pushState({}, "", href);
-          }
+          window.history.pushState({}, "", href);
         }, 300);
       } else {
-        // Different page - navigate to home with hash
+        // Target does not exist on this page - navigate to home with hash
         router.push(`/${href}`);
       }
       return;
@@ -257,15 +255,15 @@ export default function Navbar() {
               >
                 <NavLink item={item} />
                 <div
-                  className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[#EA4036]  transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 w-full h-px bg-[#EA4036]  transition-transform duration-300 ease-out origin-right group-hover:origin-left ${
                     (
                       item.href === "/"
                         ? pathname === "/" && activeSection === "hero"
                         : pathname === "/" &&
                           activeSection === item.href.replace("#", "")
                     )
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
                   }`}
                 />
               </div>
@@ -309,15 +307,15 @@ export default function Navbar() {
               <div className="group w-fit text-base" key={item.name}>
                 <NavLink item={item} />
                 <div
-                  className={`mx-auto bg-[#EA4036] h-px transition-all duration-300 ${
+                  className={`mx-auto bg-[#EA4036] h-px w-full transition-transform duration-300 ease-out origin-right group-hover:origin-left ${
                     (
                       item.href === "/"
                         ? pathname === "/" && activeSection === "hero"
                         : pathname === "/" &&
                           activeSection === item.href.replace("#", "")
                     )
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
                   }`}
                 />
               </div>

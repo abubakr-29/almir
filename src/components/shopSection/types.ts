@@ -1,17 +1,22 @@
-export const PRODUCT_CATEGORIES = [
-  "Oud",
-  "Floral",
-  "Citrus",
-  "Woody",
-  "Fresh",
-] as const;
-
-export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
+export interface SanityProduct {
+  _id: string;
+  name: string;
+  inspiredBy: string;
+  image: string;
+  category: {
+    _id: string;
+    title: string;
+    slug: string;
+  };
+}
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
-  brand: string;
+  inspiredBy: string;
   image: string;
-  category: ProductCategory;
+  category: string;
 }
+
+export const ALL_TAB = "All" as const;
+export type FilterTab = typeof ALL_TAB | string;

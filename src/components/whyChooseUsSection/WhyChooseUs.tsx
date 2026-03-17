@@ -10,24 +10,24 @@ interface ReasonCard {
 const REASONS: ReasonCard[] = [
   {
     number: "01",
-    icon: "solar:crown-bold-duotone",
-    title: "Finest Ingredients",
+    icon: "solar:hourglass-bold-duotone",
+    title: "Long-Lasting Performance",
     description:
-      "We source only the rarest and most exquisite raw materials from around the globe to ensure unparalleled longevity and sillage.",
+      "Our fragrances are meticulously formulated to linger gracefully on your skin, evolving beautifully over time and ensuring you leave a lasting impression from day to night.",
   },
   {
     number: "02",
-    icon: "solar:magic-stick-3-bold-duotone",
-    title: "Master Perfumers",
+    icon: "solar:crown-bold-duotone",
+    title: "Finest Ingredients",
     description:
-      "Every fragrance is meticulously crafted by world-renowned artisans, blending tradition with modern olfactory innovation.",
+      "We source only the high-quality fragrance oils and carefully selected notes to ensure unparalleled longevity and sillage.",
   },
   {
     number: "03",
-    icon: "solar:box-minimalistic-bold-duotone",
-    title: "Luxury Packaging",
+    icon: "solar:star-bold-duotone",
+    title: "Distinctive Identity",
     description:
-      "Encased in bespoke glass flacons, our perfumes are presented in elegant, sustainable packaging that honors the art of gifting.",
+      "Each scent is designed to stand apart, giving you a unique olfactory signature that captures attention and sets you apart in every room you enter.",
   },
 ];
 

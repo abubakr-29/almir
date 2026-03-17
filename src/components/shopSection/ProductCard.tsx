@@ -11,7 +11,7 @@ export function ProductCard({ product }: ProductCardProps) {
     const message = encodeURIComponent(
       `Hi! I'm interested in the *${productName}* fragrance. Could you please share more details?`,
     );
-    return `https://wa.me/971501234567?text=${message}`;
+    return `https://wa.me/919051879009?text=${message}`;
   };
 
   return (
@@ -35,8 +35,11 @@ export function ProductCard({ product }: ProductCardProps) {
       <h3 className="text-xl text-slate-900 mt-3 mb-2 font-medium tracking-tight">
         {product.name}
       </h3>
+      <p className="text-xs tracking-wide text-neutral-500 mb-0.5">
+        Inspired by
+      </p>
       <p className="text-xs text-slate-500 uppercase tracking-wide">
-        {product.brand}
+        {product.inspiredBy}
       </p>
       <div className="mt-1 text-[#FF3B30] text-sm font-semibold underline underline-offset-4 decoration-[#FF3B30] group-hover:text-red-700 group-hover:decoration-red-700 transition-colors cursor-pointer">
         Buy Now
