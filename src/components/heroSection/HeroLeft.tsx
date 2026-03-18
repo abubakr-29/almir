@@ -9,7 +9,7 @@ export default function HeroLeft() {
       {/* Product Image */}
       <div className="relative z-10">
         <Image
-          src={"/heroImage.png"}
+          src={"/heroImage.webp"}
           alt="Perfume Bottle Image"
           width={400}
           height={400}

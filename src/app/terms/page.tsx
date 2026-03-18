@@ -1,7 +1,10 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Terms and Conditions — AL-MIR",
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description: "Terms and conditions for AL-MIR® Fragrances.",
+  robots: { index: false },
 };
 
 const SECTIONS = [
