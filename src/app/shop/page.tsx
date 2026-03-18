@@ -1,7 +1,11 @@
 import { type SanityProduct } from "@/components/shopSection/types";
 import ShopSection from "@/components/shopSection/ShopSection";
 import { capitalizeName } from "@/libs/utils";
-import { ALL_CATEGORIES_QUERY, ALL_PRODUCTS_QUERY } from "@/libs/queries";
+import {
+  ALL_CATEGORIES_QUERY,
+  ALL_PRODUCTS_QUERY,
+  options,
+} from "@/libs/queries";
 import { client } from "@/sanity/client";
 import { Metadata } from "next";
 
@@ -25,8 +29,8 @@ export const metadata: Metadata = {
 
 export default async function ShopPage() {
   const [rawProducts, rawCategories] = await Promise.all([
-    client.fetch<SanityProduct[]>(ALL_PRODUCTS_QUERY),
-    client.fetch<SanityCategory[]>(ALL_CATEGORIES_QUERY),
+    client.fetch<SanityProduct[]>(ALL_PRODUCTS_QUERY, {}, options),
+    client.fetch<SanityCategory[]>(ALL_CATEGORIES_QUERY, {}, options),
   ]);
 
   const products = rawProducts.map((p: SanityProduct) => ({
